@@ -1,12 +1,4 @@
-#WICHTIG: pythonw -i 12.py verwenden um Dokument im Interactive Mode zu oeffnen
-
-#matplotlib inline
-#Wird nur benutzt für jupyter
-
 from matplotlib import pyplot as plt    #Zum Darstellen der Graphen
-import numpy as np                      #Fuer mathematisches Zeug
-import os
-
 
 # Verteilung der Daten
 data = [
@@ -22,12 +14,10 @@ data = [
 
 mystery_flower = [4.5, 1]
 
-
 # Verteilt Zufallswerte an w1, w2 und b
 w1 = np.random.randn()
 w2 = np.random.randn()
 b = np.random.randn()
-
 
 # Funktionen
 def sigmoid(x):                         #Zum quetschen von Zahlen auf einen Wert zwischen 0 und 1
@@ -36,14 +26,9 @@ def sigmoid(x):                         #Zum quetschen von Zahlen auf einen Wert
 def sigmoid_derivative(x):
     return sigmoid(x) * (1-sigmoid(x))
 
-def graph_plot(achse1, achse2):         #Fuer die graphische Darstellung von Sachen
-    plt.show(plt.plot(achse1, achse2))
-
-
 # Training Loop
 
 learningRate = 0.1
-costs = []
 
 for i in range(50000):
     randomPointIndex = np.random.randint(len(data))
@@ -70,23 +55,7 @@ for i in range(50000):
     w2 = w2 - learningRate * derivativeOfCostWithRespectToW2
     b = b - learningRate * derivativeOfCostWithRespectToB
 
-    costSum = 0
-    for point in data:
-
-        prediction = sigmoid(point[0] * w1 + point[1] * w2 + b)
-        costSum += (prediction - point[2]) ** 2
-
-    costs.append(costSum)
-
-#plt.plot(costs)
-#plt.show()
-
-
 # Predict
 
-def which_flower(length, width):
-    z = sigmoid(length * w1 + width * w2 +b)
-    if z < .5:
-        os.system("say blau")
-    else:
-        os.system("say rot")
+print(mystery_flower)
+print(sigmoid(length * w1 + width * w2 +b)
